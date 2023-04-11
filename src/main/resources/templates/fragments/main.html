@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <link th:fragment="favicon" href="/assets/img/favicon.png" rel="icon">
+    <link th:fragment="appletouchicon" href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link th:fragment="googleapis" rel="preconnect" href="https://fonts.googleapis.com">
+    <link th:fragment="gstatic" rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link th:fragment="googleapiscom" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+
+    <link th:fragment="bootstrapmincss" href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link th:fragment="bootstrapiconscss" href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link th:fragment="aoscss" href="/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link th:fragment="glightboxmincss" href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link th:fragment="swipermiscss" href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <link th:fragment="variablescss" href="/assets/css/variables.css" rel="stylesheet">
+    <link th:fragment="maincss" href="/assets/css/main.css" rel="stylesheet">
+
+    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/vendor/aos/aos.js"></script>
+    <script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="/assets/vendor/php-email-form/validate.js"></script>
+    <script src="/assets/js/main.js"></script>
+    <title>Hostel booking</title>
+</head>
+<body>
+<header id="header" class="header fixed-top" data-scrollto-offset="0" th:fragment="header">
+    <div class="container-fluid d-flex align-items-center justify-content-between">
+
+        <a href="/" class="logo d-flex align-items-center scrollto me-auto me-lg-0">
+            <h1>Hostel Booking<span>.</span></h1>
+        </a>
+
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a class="nav-link scrollto" href="/about">About</a></li>
+                <li><a class="nav-link scrollto" href="/team">Team</a></li>
+                <li><a class="nav-link scrollto" href="/contact">Contact</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle d-none"></i>
+        </nav><!-- .navbar -->
+
+        <div class="row" sec:authorize="!isAuthenticated()">
+            <div class="col">
+                <a class="btn-getstarted scrollto" href="/register">Signup</a>
+            </div>
+            <div class="col">
+                <a class="btn-getstarted scrollto" href="/login">Sign in</a>
+            </div>
+        </div>
+
+        <div class="row" style="width: fit-content;" sec:authorize="isAuthenticated()">
+            <div class="col">
+                <a class="btn-getstarted scrollto" href="/user/profile">Profile</a>
+            </div>
+            <div class="col">
+                <a class="btn-getstarted scrollto" href="/logout">Logout</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<footer id="footer" class="footer" th:fragment="footer">
+
+    <div class="footer-content">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-info">
+                        <h3>Hostel Booking</h3>
+                        <p>
+                            Mangilik el, 14 <br>
+                            Kazakhstan<br><br>
+                            <strong>Phone:</strong> +7 7172 777 9797<br>
+                            <strong>Email:</strong> info@hostelbooking.com<br>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6 footer-links">
+                    <h4>Useful Links</h4>
+                    <ul>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">Web Development</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">Graphic Design</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-legal text-center">
+        <div class="container d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center">
+
+            <div class="d-flex flex-column align-items-center align-items-lg-start">
+                <div class="copyright">
+                    &copy Copyright <strong><span>HostelBooking</span></strong>. All Rights Reserved
+                </div>
+            </div>
+
+            <div class="social-links order-first order-lg-last mb-3 mb-lg-0">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="google-plus"><i class="bi bi-skype"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+            </div>
+
+        </div>
+    </div>
+
+</footer>
+<main id="main" th:fragment="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+        <div class="container">
+        </div>
+    </div><!-- End Breadcrumbs -->
+    <section class="inner-page">
+        <div class="container" data-aos="fade-up">
+            <div  th:each="hostel : ${hostels}">
+                <div class="row">
+                    <div class="col">
+                        <img class="" th:if="${!hostel.imageList.isEmpty()}" th:src="@{/images/{id}(id=${hostel.imageList.get(0).id})}" width="200" height="200" alt="image">
+                    </div>
+                    <div class="col">
+                        <h5 class=""  th:text="${hostel.name}"></h5>
+                        <p class=""  th:text="${hostel.address + hostel.numberOfBeds}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a th:href="@{/hostels/edit/{id}(id=${hostel.id})}" class="btn btn-primary">Edit</a>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>

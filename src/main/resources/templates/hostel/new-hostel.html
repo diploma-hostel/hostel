@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/main.html :: head"><title>Creating hostel</title></head>
+<body>
+<div class="container">
+  <h1>Create Hostel</h1>
+  <form action="/hostels/new" method="post" enctype="multipart/form-data" th:object="${hostel}">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" class="form-control" id="name" name="name" required th:field="*{name}">
+    </div>
+    <div class="form-group">
+      <label for="address">Address:</label>
+      <input type="text" class="form-control" id="address" name="address" required th:field="*{address}">
+    </div>
+    <div class="form-group">
+      <label for="numberOfBeds">Number of Beds:</label>
+      <input type="number" class="form-control" id="numberOfBeds" name="numberOfBeds" required th:field="*{numberOfBeds}">
+    </div>
+    <div class="form-group">
+      <label for="pricePerDay">Price per Day:</label>
+      <input type="number" class="form-control" id="pricePerDay" name="pricePerDay" required th:field="*{pricePerDay}">
+    </div>
+    <div class="form-group">
+      <label for="pricePerMonth">Price per Month:</label>
+      <input type="number" class="form-control" id="pricePerMonth" name="pricePerMonth" required th:field="*{pricePerMonth}">
+    </div>
+    <div class="form-group">
+      <label for="discount">Discount:</label>
+      <input type="number" class="form-control" id="discount" name="discount" required th:field="*{discount}">
+    </div>
+    <div class="form-group">
+      <label for="images">Images:</label>
+      <input type="file" class="form-control-file" id="images" name="images" multiple>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+  </form>
+</div>
+</body>
+</html>
