@@ -1,17 +1,16 @@
 package booking.hostel.entity;
 
-import javax.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
+public enum Role {
+    ROLE_ADMIN("Администратор"),
+    ROLE_OWNER("Владелец"),
+    ROLE_CLIENT("Клиент");
 
-@Entity
-@Data
-@NoArgsConstructor
-@SuperBuilder
-public class Role {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
-    String name;
+    private final String name;
+    Role(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

@@ -23,6 +23,12 @@ public class Hostel {
     Double pricePerDay;
     Double pricePerMonth;
     Double discount;
-    @ManyToMany
+    @Column(columnDefinition = "TEXT")
+    String description;
+    String status;
+    Long createdTimestamp;
+    Long updatedTimestamp;
+    @OneToMany
     List<Image> imageList;
+    Boolean isApproved;
 }

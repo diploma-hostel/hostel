@@ -3177,9 +3177,13 @@ section {
 }
 
 .table {
-  border: 1px solid var(--color-primary);
+  border-bottom: 1px solid var(--color-primary);
 }
 
-.table * {
-  border: 0;
+.right-border {
+  border-right: 1px solid var(--color-primary);
+}
+
+.table:nth-last-child(1) {
+  border-bottom: 0px;
 }

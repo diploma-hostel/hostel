@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,8 +33,9 @@ public class HostelController {
     }
 
     @GetMapping
-    public String getAll(Model model) {
-        List<Hostel> hostels = hostelService.getAll();
+    public String getAll(Model model, Principal principal) {
+        User owner = userService.getByPhone(principal.getName());
+        List<Hostel> hostels = hostelService.getByOwner(owner);
         model.addAttribute("hostels", hostels);
         return "hostel/hostels";
     }
@@ -61,7 +63,10 @@ public class HostelController {
         }
 
         hostel.setImageList(imageList);
-        log.info(mapper.writeValueAsString(hostel));
+//        log.info(mapper.writeValueAsString(hostel));
+        hostel.setCreatedTimestamp(System.currentTimeMillis());
+        hostel.setUpdatedTimestamp(System.currentTimeMillis());
+        hostel.setIsApproved(false);
         hostelService.save(hostel);
         return "redirect:/hostels";
     }

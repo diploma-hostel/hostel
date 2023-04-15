@@ -19,6 +19,10 @@ public class HostelService {
                 .orElseThrow(() -> new RuntimeException("Hostel not found with id: " + id));
     }
 
+    public List<Hostel> getByOwner(User owner) {
+        return hostelRepository.findAllByOwner(owner);
+    }
+
     public List<Hostel> getAll() {
         return hostelRepository.findAll();
     }

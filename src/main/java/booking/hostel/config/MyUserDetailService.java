@@ -27,7 +27,7 @@ public class MyUserDetailService implements UserDetailsService {
             throw new UsernameNotFoundException("User with phone: " + phone + " not found");
         }
         User user = varUser.get();
-        GrantedAuthority roleAuthority = new SimpleGrantedAuthority(user.getRole().getName());
+        GrantedAuthority roleAuthority = new SimpleGrantedAuthority(user.getRole().toString());
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         grantedAuthorities.add(roleAuthority);
         return buildUserForAuthentication(user, grantedAuthorities);

@@ -45,16 +45,16 @@
 
         <div class="row" sec:authorize="!isAuthenticated()">
             <div class="col">
-                <a class="btn-getstarted scrollto" href="/register">Signup</a>
+                <a class="btn-getstarted scrollto" href="/signup">Signup</a>
             </div>
             <div class="col">
-                <a class="btn-getstarted scrollto" href="/login">Sign in</a>
+                <a class="btn-getstarted scrollto" href="/login">Login</a>
             </div>
         </div>
 
         <div class="row" style="width: fit-content;" sec:authorize="isAuthenticated()">
             <div class="col">
-                <a class="btn-getstarted scrollto" href="/user/profile">Profile</a>
+                <a class="btn-getstarted scrollto" href="/users/profile">Profile</a>
             </div>
             <div class="col">
                 <a class="btn-getstarted scrollto" href="/logout">Logout</a>
@@ -127,27 +127,36 @@
     </div>
 
 </footer>
-<main id="main" th:fragment="main">
+<main id="main" th:fragment="hostelstable">
 
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs">
         <div class="container">
+            <div class="d-flex justify-content-center align-items-center">
+                <h2>Hostels</h2>
+            </div>
         </div>
     </div><!-- End Breadcrumbs -->
     <section class="inner-page">
         <div class="container" data-aos="fade-up">
-            <div  th:each="hostel : ${hostels}">
-                <div class="row">
-                    <div class="col">
-                        <img class="" th:if="${!hostel.imageList.isEmpty()}" th:src="@{/images/{id}(id=${hostel.imageList.get(0).id})}" width="200" height="200" alt="image">
-                    </div>
-                    <div class="col">
-                        <h5 class=""  th:text="${hostel.name}"></h5>
-                        <p class=""  th:text="${hostel.address + hostel.numberOfBeds}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a th:href="@{/hostels/edit/{id}(id=${hostel.id})}" class="btn btn-primary">Edit</a>
-                    </div>
+            <div class="row table p-3 mb-3" th:each="hostel : ${hostels}">
+                <div class="col-4 justify-content-center align-items-center">
+                    <img class="" th:if="${!hostel.imageList.isEmpty()}" th:src="@{/images/{id}(id=${hostel.imageList.get(0).id})}" width="320" height="180" alt="image">
+                    <img class="" th:if="${hostel.imageList.isEmpty()}" src="https://prescotthobbies.com/wp-content/uploads/2019/12/image-not-available-684f2d57b8fb401a6846574ad4d7173be03aab64aac30c989eba8688ad9bfa05.png" width="320" height="180" alt="image">
                 </div>
-                <hr>
+                <div class="col-6 ps-3 justify-content-start align-items-center">
+                    <h5 class="text-primary"  th:text="${#strings.capitalize(hostel.name)}"></h5>
+                    <h6 th:text="${hostel.address}"></h6>
+                    <h6 class=""  th:text="${hostel.numberOfBeds} + ' мест'"></h6>
+                    <h6 class=""  th:text="${hostel.description}"></h6>
+                    <h6 class=""  th:text="'Состояние:' + ${hostel.status}"></h6>
+                </div>
+                <div class="col-2">
+                    <a th:href="@{/hostels/settle/{id}(id=${hostel.id})}" class="btn btn-primary">Settle</a>
+                </div>
+            </div>
+            <div class="row table p-3 mb-3" th:if="${hostels.isEmpty()}">
+                <h1>Table is empty</h1>
             </div>
         </div>
     </section>

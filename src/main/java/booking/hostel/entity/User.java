@@ -18,6 +18,6 @@ public class User {
     @Column(unique = true, nullable = false)
     String phone;
     String password;
-    @ManyToOne
+    @Enumerated(EnumType.STRING)
     Role role;
 }
