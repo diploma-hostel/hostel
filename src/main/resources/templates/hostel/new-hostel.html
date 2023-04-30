@@ -50,11 +50,16 @@
                                    th:field="*{description}">
                         </div>
                         <div class="form-group mb-3">
+                            <label for="discount">Sketch fab link:</label>
+                            <input type="text" class="form-control" id="sketchfab_link" name="sketchfab_link" required
+                                   th:field="*{sketchfab_link}">
+                        </div>
+                        <div class="form-group mb-3">
                             <label for="status" class="form-label">Состояние:</label>
                             <select name="status" id="status" class="form-control" required>
-                                <option value="Excellent">Отличное</option>
-                                <option value="Good">Хорошее</option>
-                                <option value="Not bad">Среднее</option>
+                                <option value="Отличное">Отличное</option>
+                                <option value="Хорошее">Хорошее</option>
+                                <option value="Среднее">Среднее</option>
                             </select>
                         </div>
                         <div class="form-group mb-3">

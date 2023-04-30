@@ -13,6 +13,7 @@ public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
+    Integer number;
     @ManyToOne
     Hostel hostel;
     @ManyToOne

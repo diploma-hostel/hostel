@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/users")
@@ -21,42 +22,23 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
     private final HostelService hostelService;
-
-//    @GetMapping("/{id}")
-//    public String getById(@PathVariable Integer id, Model model) {
-//        User user = userService.getById(id);
-//        model.addAttribute("user", user);
-//        return "user/user";
-//    }
-
-//    @GetMapping
-//    public String getAll(Model model) {
-//        List<User> users = userService.getAll();
-//        model.addAttribute("users", users);
-//        return "user/users";
-//    }
-
-//    @GetMapping("/new")
-//    public String create(Model model) {
-//        model.addAttribute("roles", Role.values());
-//        model.addAttribute("user", new User());
-//        return "user/new-user";
-//    }
+    private final BookingService bookingService;
 
     @GetMapping("/profile")
     public String profile(Model model, Principal principal) {
         User user = userService.getByPhone(principal.getName());
         List<Hostel> hostels = new ArrayList<>();
+        List<Booking> bookings = new ArrayList<>();
         if (user.getRole().getName().equals(Role.ROLE_OWNER.getName())) {
             hostels = hostelService.getByOwner(user);
             model.addAttribute("isOwner", true);
         }
         if (user.getRole().equals(Role.ROLE_CLIENT)) {
-//            get list of liked hostels
-//            hostels = hostelService.getByOwner(owner);
+            bookings = bookingService.getByUser(user);
             model.addAttribute("isOwner", false);
         }
         model.addAttribute("hostels", hostels);
+        model.addAttribute("bookings", bookings);
         model.addAttribute("user", user);
         return "user/profile";
     }

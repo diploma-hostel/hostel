@@ -24,7 +24,22 @@ public class BookingService {
         return bookingRepository.findAll();
     }
 
+    public List<Booking> getByHostel(Hostel hostel) {
+        return bookingRepository.findAllByHostel(hostel);
+    }
+    public List<Booking> getByUser(User user) {
+        return bookingRepository.findAllByUser(user);
+    }
+    public boolean existsByHostelAndUser(Hostel hostel, User user) {
+        return bookingRepository.existsByHostelAndUser(hostel, user);
+    }
+
     public Booking save(Booking booking) {
         return bookingRepository.save(booking);
+    }
+    public void unsettle(Hostel hostel, int number) {
+        List<Booking> all = bookingRepository.findAllByHostelAndNumber(hostel, number);
+        if (all != null)
+            bookingRepository.deleteAll(all);
     }
 }

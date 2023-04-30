@@ -3187,3 +3187,8 @@ section {
 .table:nth-last-child(1) {
   border-bottom: 0px;
 }
+
+.booking {
+  overflow-x: scroll;
+  flex-wrap: nowrap;
+}

@@ -25,6 +25,7 @@ public class Hostel {
     Double discount;
     @Column(columnDefinition = "TEXT")
     String description;
+    String sketchfab_link;
     String status;
     Long createdTimestamp;
     Long updatedTimestamp;

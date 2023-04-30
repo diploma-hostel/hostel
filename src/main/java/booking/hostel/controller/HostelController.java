@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/hostels")
@@ -23,21 +24,88 @@ import java.util.List;
 public class HostelController {
     private final ObjectMapper mapper;
     private final HostelService hostelService;
+    private final BookingService bookingService;
     private final UserService userService;
 
     @GetMapping("/{id}")
     public String getById(@PathVariable Integer id, Model model) {
         Hostel hostel = hostelService.getById(id);
+        System.out.println(hostel.getImageList().size());
         model.addAttribute("hostel", hostel);
         return "hostel/hostel";
     }
 
-    @GetMapping
-    public String getAll(Model model, Principal principal) {
-        User owner = userService.getByPhone(principal.getName());
-        List<Hostel> hostels = hostelService.getByOwner(owner);
-        model.addAttribute("hostels", hostels);
-        return "hostel/hostels";
+    @PostMapping("/update")
+    @SneakyThrows
+    public String update(@ModelAttribute Hostel hostel, @RequestParam("images") MultipartFile[] images, Authentication authentication) {
+        hostel.setOwner(userService.getByPhone(authentication.getName()));
+        System.out.println(hostel.getId());
+        List<Image> imageList = hostel.getImageList();
+        for (MultipartFile file : images) {
+            if (file.getSize() > 0 && file.getSize() <= 4194304) { // check file size
+                byte[] bytes = file.getBytes();
+                String fileName = file.getOriginalFilename();
+                String fileType = file.getContentType();
+                Image image = Image.builder().name(fileName).data(bytes).type(fileType).build();
+                imageList.add(image);
+            }
+        }
+
+        hostel.setImageList(imageList);
+        hostel.setCreatedTimestamp(System.currentTimeMillis());
+        hostel.setUpdatedTimestamp(System.currentTimeMillis());
+        hostel.setIsApproved(false);
+        hostelService.save(hostel);
+        return "redirect:/";
+    }
+
+    @GetMapping("/settle/{id}")
+    public String settle(@PathVariable Integer id, Model model, @RequestParam(required = false) Integer number, Principal principal) {
+        Hostel hostel = hostelService.getById(id);
+        if (number == null) {
+            List<Integer> reservedNumbers = bookingService.getByHostel(hostel).stream()
+                    .map(Booking::getNumber).collect(Collectors.toList());
+            model.addAttribute("hostel", hostel);
+            model.addAttribute("reservedNumbers", reservedNumbers);
+            return "hostel/settle";
+        } else {
+            User user = userService.getByPhone(principal.getName());
+            if (user != null && user.getRole().getName().equals(Role.ROLE_CLIENT.getName())) {
+                if (bookingService.existsByHostelAndUser(hostel, user)) {
+                    throw new RuntimeException("Already exists");
+                }
+                Booking booking = Booking.builder().number(number).hostel(hostel).user(user).build();
+                bookingService.save(booking);
+                return "redirect:/";
+            } else {
+                throw new RuntimeException("Role is incorrect");
+            }
+        }
+    }
+
+    @GetMapping("/unsettle/{id}")
+    public String unsettle(@PathVariable Integer id, @RequestParam Integer number, Principal principal) {
+        Hostel hostel = hostelService.getById(id);
+        if (hostel == null) throw new RuntimeException("Not exists");
+        User user = userService.getByPhone(principal.getName());
+        if (user != null && user.getRole().getName().equals(Role.ROLE_OWNER.getName())) {
+            bookingService.unsettle(hostel, number);
+            return "redirect:/hostels/renters/" + id;
+        } else {
+            throw new RuntimeException("Role is incorrect");
+        }
+    }
+
+    @GetMapping("/renters/{id}")
+    public String renters(@PathVariable Integer id, Model model, Principal principal) {
+        System.out.println(id);
+        Hostel hostel = hostelService.getById(id);
+        if (principal == null) throw new RuntimeException("Not logged");
+        if (hostel == null) throw new RuntimeException("Not exists");
+        System.out.println(hostel.getName());
+        List<Booking> renters = bookingService.getByHostel(hostel);
+        model.addAttribute("renters", renters);
+        return "hostel/renters";
     }
 
     @GetMapping("/new")
@@ -68,7 +136,7 @@ public class HostelController {
         hostel.setUpdatedTimestamp(System.currentTimeMillis());
         hostel.setIsApproved(false);
         hostelService.save(hostel);
-        return "redirect:/hostels";
+        return "redirect:/";
     }
 }
 

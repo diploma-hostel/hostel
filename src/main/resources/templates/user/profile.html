@@ -16,12 +16,12 @@
         <div class="container-fluid" data-aos="fade-up">
             <div class="row">
                 <div class="col-9 right-border">
-                    <div class="row table pb-3 mb-3">
+                    <div class="row table pb-3 mb-3" th:if="${isOwner}">
                         <div class="col-2 offset-5">
-                            <a th:href="@{/hostels/new}" class="btn btn-primary">New hostel</a>
+                            <a th:href="@{/hostels/new}" class="btn btn-outline-primary">New hostel</a>
                         </div>
                     </div>
-                    <div class="row table p-3 mb-3" th:each="hostel : ${hostels}">
+                    <div class="row table p-3 mb-3" th:each="hostel : ${hostels}"  th:if="${isOwner}">
                         <div class="col-4 justify-content-center align-items-center">
                             <img class="" th:if="${!hostel.imageList.isEmpty()}" th:src="@{/images/{id}(id=${hostel.imageList.get(0).id})}" width="320" height="180" alt="image">
                             <img class="" th:if="${hostel.imageList.isEmpty()}" src="https://prescotthobbies.com/wp-content/uploads/2019/12/image-not-available-684f2d57b8fb401a6846574ad4d7173be03aab64aac30c989eba8688ad9bfa05.png" width="320" height="180" alt="image">
@@ -34,11 +34,30 @@
                             <h6 class=""  th:text="'Состояние:' + ${hostel.status}"></h6>
                         </div>
                         <div class="col-2">
-                            <a th:if="${isOwner}" th:href="@{/hostels/{id}(id=${hostel.id})}" class="btn btn-primary">Update</a>
-                            <a th:if="${!isOwner}" th:href="@{/hostels/settle/{id}(id=${hostel.id})}" class="btn btn-primary">Settle</a>
+                            <a th:if="${isOwner}" th:href="@{/hostels/{id}(id=${hostel.id})}" class="btn btn-warning">Update</a>
+                            <a th:if="${isOwner}" th:href="@{/hostels/renters/{id}(id=${hostel.id})}" class="btn btn-primary mt-3">Renters</a>
                         </div>
                     </div>
-                    <div class="row p-3 mb-3 text-center" th:if="${hostels.isEmpty()}">
+                    <div class="row p-3 mb-3 text-center" th:if="${hostels.isEmpty() && isOwner}">
+                        <h1>Table is empty</h1>
+                    </div>
+                    <div class="row table p-3 mb-3" th:each="booking : ${bookings}"  th:if="${!isOwner}">
+                        <div class="col-4 justify-content-center align-items-center">
+                            <img class="" th:if="${!booking.hostel.imageList.isEmpty()}" th:src="@{/images/{id}(id=${booking.hostel.imageList.get(0).id})}" width="320" height="180" alt="image">
+                            <img class="" th:if="${booking.hostel.imageList.isEmpty()}" src="https://prescotthobbies.com/wp-content/uploads/2019/12/image-not-available-684f2d57b8fb401a6846574ad4d7173be03aab64aac30c989eba8688ad9bfa05.png" width="320" height="180" alt="image">
+                        </div>
+                        <div class="col-6 ps-3 justify-content-start align-items-center">
+                            <h5 class="text-primary"  th:text="${#strings.capitalize(booking.hostel.name)}"></h5>
+                            <h6 th:text="${booking.hostel.address}"></h6>
+                            <h6 class="text-danger"  th:text="${booking.number} + ' место койко'"></h6>
+                            <h6 class=""  th:text="${booking.hostel.description}"></h6>
+                            <h6 class=""  th:text="'Состояние:' + ${booking.hostel.status}"></h6>
+                        </div>
+                        <div class="col-2">
+                            <a th:if="${!isOwner}" th:href="@{/hostels/settle/{id}(id=${booking.hostel.id})}" class="btn btn-primary">Settle</a>
+                        </div>
+                    </div>
+                    <div class="row p-3 mb-3 text-center" th:if="${bookings.isEmpty() && !isOwner}">
                         <h1>Table is empty</h1>
                     </div>
                 </div>
@@ -54,7 +73,7 @@
                                    th:field="*{phone}" disabled>
                         </div>
                         <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" value="" id="owner" name="owner" checked disabled>
+                            <input class="form-check-input" type="checkbox" value="" id="owner" name="owner" th:checked="${isOwner}" disabled>
                             <label class="form-check-label" for="owner">
                                 Я владелец
                             </label>

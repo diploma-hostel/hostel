@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:insert="fragments/main.html :: head"><title>Login page</title></head>
+<body>
+<header th:insert="fragments/main.html :: header"></header>
+<main id="main">
+  <!-- ======= Breadcrumbs ======= -->
+  <div class="breadcrumbs">
+    <div class="container">
+      <div class="d-flex justify-content-center align-items-center">
+        <h2>Renters</h2>
+      </div>
+    </div>
+  </div><!-- End Breadcrumbs -->
+  <section class="inner-page">
+    <div class="container" data-aos="fade-up">
+      <div class="row table p-3 mb-3"  th:if="${!renters.isEmpty()}">
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Full name</th>
+            <th scope="col">Phone number</th>
+            <th scope="col">Bed number</th>
+            <th scope="col"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="renter, iter : ${renters}">
+            <th scope="row" th:text="${iter.index + 1}"></th>
+            <td th:text="${#strings.capitalize(renter.user.fio)}"></td>
+            <td th:text="${renter.user.phone}"></td>
+            <td th:text="${renter.number}"></td>
+            <td><a th:href="@{/hostels/unsettle/{id}(id=${renter.hostel.id},number=${renter.number})}" class="btn btn-danger">Unsettle</a></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row table p-3 mb-3" th:if="${renters.isEmpty()}">
+        <h1>Table is empty</h1>
+      </div>
+    </div>
+  </section>
+</main>
+<footer th:insert="fragments/main.html :: footer"></footer>
+<a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<div id="preloader"></div>
+</body>
+</html>

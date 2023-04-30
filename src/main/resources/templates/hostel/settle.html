@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/main.html :: head"><title>Creating hostel</title></head>
+<body>
+<header th:insert="fragments/main.html :: header"></header>
+<main id="main">
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="d-flex justify-content-center align-items-center">
+                <h2>Settle Page</h2>
+            </div>
+        </div>
+    </div><!-- End Breadcrumbs -->
+    <section class="inner-page">
+        <div class="container" data-aos="fade-up">
+            <div class="row booking p-3">
+                <div class="col-1" th:each="bedNumber, iter : ${#numbers.sequence(1, hostel.numberOfBeds)}">
+                    <a th:if="${!reservedNumbers.contains(bedNumber)}" class="btn btn-primary" th:text="${bedNumber} + ' койко'"
+                       th:href="@{/hostels/settle/{id}(id=${hostel.id},number=${bedNumber})}"></a>
+                    <a th:if="${reservedNumbers.contains(bedNumber)}" class="btn btn-danger" th:text="${bedNumber} + ' койко'"
+                       disabled></a>
+                </div>
+            </div>
+            <br>
+            <hr>
+            <br>
+            <div class="row">
+                <div class="col d-flex justify-content-center align-items-center">
+                    <div class="sketchfab-embed-wrapper">
+                        <iframe title="Fairy Hostel" frameborder="0" allowfullscreen mozallowfullscreen="true"
+                                webkitallowfullscreen="true"
+                                allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
+                                execution-while-out-of-viewport
+                                execution-while-not-rendered web-share width="900" height="400"
+                                th:src="${hostel.sketchfab_link} + '/embed?autostart=1'"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<footer th:insert="fragments/main.html :: footer"></footer>
+<a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<div id="preloader"></div>
+</body>
+</html>
