@@ -36,28 +36,28 @@
 
         <nav id="navbar" class="navbar">
             <ul>
-                <li><a class="nav-link scrollto" href="/about">About</a></li>
-                <li><a class="nav-link scrollto" href="/team">Team</a></li>
-                <li><a class="nav-link scrollto" href="/contact">Contact</a></li>
+<!--                <li><a class="nav-link scrollto" href="/about">About</a></li>-->
+                <li><a class="nav-link scrollto" href="/team">Команда</a></li>
+                <li><a class="nav-link scrollto" href="/contact">Контакты</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle d-none"></i>
         </nav><!-- .navbar -->
 
         <div class="row" sec:authorize="!isAuthenticated()">
             <div class="col">
-                <a class="btn-getstarted scrollto" href="/signup">Signup</a>
+                <a class="btn-getstarted scrollto" href="/signup">Зарегистрироваться</a>
             </div>
             <div class="col">
-                <a class="btn-getstarted scrollto" href="/login">Login</a>
+                <a class="btn-getstarted scrollto" href="/login">Войти</a>
             </div>
         </div>
 
         <div class="row" style="width: fit-content;" sec:authorize="isAuthenticated()">
             <div class="col">
-                <a class="btn-getstarted scrollto" href="/users/profile">Profile</a>
+                <a class="btn-getstarted scrollto" href="/users/profile">Профиль</a>
             </div>
             <div class="col">
-                <a class="btn-getstarted scrollto" href="/logout">Logout</a>
+                <a class="btn-getstarted scrollto" href="/logout">Выйти</a>
             </div>
         </div>
     </div>
@@ -73,10 +73,10 @@
                     <div class="footer-info">
                         <h3>Hostel Booking</h3>
                         <p>
-                            Mangilik el, 14 <br>
-                            Kazakhstan<br><br>
-                            <strong>Phone:</strong> +7 7172 777 9797<br>
-                            <strong>Email:</strong> info@hostelbooking.com<br>
+                            Мангилик ел 55/11, Нур-Султан<br>
+                            Казахстан<br><br>
+                            <strong>Номер:</strong> +7 7172 777 9797<br>
+                            <strong>Почта:</strong> info@hostelbooking.com<br>
                         </p>
                     </div>
                 </div>
@@ -89,7 +89,7 @@
 
             <div class="d-flex flex-column align-items-center align-items-lg-start">
                 <div class="copyright">
-                    &copy Copyright <strong><span>HostelBooking</span></strong>. All Rights Reserved
+                    &copy Copyright <strong><span>HostelBooking</span></strong>. Все права защищены
                 </div>
             </div>
 
@@ -111,7 +111,7 @@
     <div class="breadcrumbs">
         <div class="container">
             <div class="d-flex justify-content-center align-items-center">
-                <h2>Hostels</h2>
+                <h2>Хостелы</h2>
             </div>
         </div>
     </div><!-- End Breadcrumbs -->
@@ -130,11 +130,11 @@
                     <h6 class=""  th:text="'Состояние:' + ${hostel.status}"></h6>
                 </div>
                 <div class="col-2">
-                    <a th:href="@{/hostels/settle/{id}(id=${hostel.id})}" class="btn btn-primary">Settle</a>
+                    <a th:href="@{/hostels/settle/{id}(id=${hostel.id})}" class="btn btn-primary">Поселиться</a>
                 </div>
             </div>
             <div class="row table p-3 mb-3" th:if="${hostels.isEmpty()}">
-                <h1>Table is empty</h1>
+                <h1>Пустая таблица</h1>
             </div>
         </div>
     </section>

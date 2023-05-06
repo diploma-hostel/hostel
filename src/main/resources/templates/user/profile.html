@@ -8,7 +8,7 @@
     <div class="breadcrumbs">
         <div class="container">
             <div class="d-flex justify-content-center align-items-center">
-                <h2>Welcome, <span th:text="${user.getFio()}"></span></h2>
+                <h2>Здравствуйте, <span th:text="${user.getFio()}"></span></h2>
             </div>
         </div>
     </div><!-- End Breadcrumbs -->
@@ -18,7 +18,7 @@
                 <div class="col-9 right-border">
                     <div class="row table pb-3 mb-3" th:if="${isOwner}">
                         <div class="col-2 offset-5">
-                            <a th:href="@{/hostels/new}" class="btn btn-outline-primary">New hostel</a>
+                            <a th:href="@{/hostels/new}" class="btn btn-outline-primary">Добавить хостел</a>
                         </div>
                     </div>
                     <div class="row table p-3 mb-3" th:each="hostel : ${hostels}"  th:if="${isOwner}">
@@ -34,12 +34,12 @@
                             <h6 class=""  th:text="'Состояние:' + ${hostel.status}"></h6>
                         </div>
                         <div class="col-2">
-                            <a th:if="${isOwner}" th:href="@{/hostels/{id}(id=${hostel.id})}" class="btn btn-warning">Update</a>
-                            <a th:if="${isOwner}" th:href="@{/hostels/renters/{id}(id=${hostel.id})}" class="btn btn-primary mt-3">Renters</a>
+                            <a th:if="${isOwner}" th:href="@{/hostels/{id}(id=${hostel.id})}" class="btn btn-warning">Изменить</a>
+                            <a th:if="${isOwner}" th:href="@{/hostels/renters/{id}(id=${hostel.id})}" class="btn btn-primary mt-3">Арендаторы</a>
                         </div>
                     </div>
                     <div class="row p-3 mb-3 text-center" th:if="${hostels.isEmpty() && isOwner}">
-                        <h1>Table is empty</h1>
+                        <h1>Пустая таблица</h1>
                     </div>
                     <div class="row table p-3 mb-3" th:each="booking : ${bookings}"  th:if="${!isOwner}">
                         <div class="col-4 justify-content-center align-items-center">
@@ -54,21 +54,21 @@
                             <h6 class=""  th:text="'Состояние:' + ${booking.hostel.status}"></h6>
                         </div>
                         <div class="col-2">
-                            <a th:if="${!isOwner}" th:href="@{/hostels/settle/{id}(id=${booking.hostel.id})}" class="btn btn-primary">Settle</a>
+                            <a th:if="${!isOwner}" th:href="@{/hostels/settle/{id}(id=${booking.hostel.id})}" class="btn btn-primary">Поселиться</a>
                         </div>
                     </div>
                     <div class="row p-3 mb-3 text-center" th:if="${bookings.isEmpty() && !isOwner}">
-                        <h1>Table is empty</h1>
+                        <h1>Пустая таблица</h1>
                     </div>
                 </div>
                 <div class="col-3 p-3">
                     <form action="/signup" method="post" th:object="${user}">
                         <div class="form-group mb-3">
-                            <label for="fio">Full name:</label>
+                            <label for="fio">ФИО:</label>
                             <input type="text" class="form-control" id="fio" name="fio" required th:field="*{fio}">
                         </div>
                         <div class="form-group mb-3">
-                            <label for="phone">Phone:</label>
+                            <label for="phone">Номер телефона:</label>
                             <input type="text" class="form-control" id="phone" name="phone" required
                                    th:field="*{phone}" disabled>
                         </div>
@@ -79,11 +79,11 @@
                             </label>
                         </div>
                         <div class="form-group mb-3">
-                            <label for="password">Password:</label>
+                            <label for="password">Пароль:</label>
                             <input type="password" class="form-control" id="password" name="password" required
                                    th:field="*{password}">
                         </div>
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="submit" class="btn btn-primary">Изменить</button>
                     </form>
                 </div>
             </div>

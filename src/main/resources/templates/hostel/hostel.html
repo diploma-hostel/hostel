@@ -4,76 +4,85 @@
 <body>
 <header th:insert="fragments/main.html :: header"></header>
 <main id="main">
-  <!-- ======= Breadcrumbs ======= -->
-  <div class="breadcrumbs">
-    <div class="container">
-    </div>
-  </div><!-- End Breadcrumbs -->
-  <section class="inner-page">
-    <div class="container" data-aos="fade-up">
-      <div class="row">
-        <div class="col-6 offset-3">
-          <h1>Hostel</h1>
-          <form th:action="@{/hostels/update}" method="post" enctype="multipart/form-data" th:object="${hostel}">
-            <input type="hidden" th:field="*{id}">
-            <input type="hidden" th:field="*{imageList}">
-            <div class="form-group mb-3">
-              <label for="name">Name:</label>
-              <input type="text" class="form-control" id="name" name="name" required th:field="*{name}">
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="d-flex justify-content-center align-items-center">
+                <h2>Хостел</h2>
             </div>
-            <div class="form-group mb-3">
-              <label for="address">Address:</label>
-              <input type="text" class="form-control" id="address" name="address" required
-                     th:field="*{address}">
-            </div>
-            <div class="form-group mb-3">
-              <label for="numberOfBeds">Number of Beds:</label>
-              <input type="number" class="form-control" id="numberOfBeds" name="numberOfBeds" required
-                     th:field="*{numberOfBeds}">
-            </div>
-            <div class="form-group mb-3">
-              <label for="pricePerDay">Price per Day:</label>
-              <input type="number" class="form-control" id="pricePerDay" name="pricePerDay" required
-                     th:field="*{pricePerDay}">
-            </div>
-            <div class="form-group mb-3">
-              <label for="pricePerMonth">Price per Month:</label>
-              <input type="number" class="form-control" id="pricePerMonth" name="pricePerMonth" required
-                     th:field="*{pricePerMonth}">
-            </div>
-            <div class="form-group mb-3">
-              <label for="discount">Discount:</label>
-              <input type="number" class="form-control" id="discount" name="discount" required
-                     th:field="*{discount}">
-            </div>
-            <div class="form-group mb-3">
-              <label for="discount">Description:</label>
-              <input type="text" class="form-control" id="description" name="description" required
-                     th:field="*{description}">
-            </div>
-            <div class="form-group mb-3">
-              <label for="discount">Sketch fab link:</label>
-              <input type="text" class="form-control" id="sketchfab_link" name="sketchfab_link" required
-                     th:field="*{sketchfab_link}">
-            </div>
-            <div class="form-group mb-3">
-              <label for="status" class="form-label">Состояние:</label>
-              <select name="status" id="status" class="form-control" required>
-                <option value="Отличное">Отличное</option>
-                <option value="Хорошее">Хорошее</option>
-                <option value="Среднее">Среднее</option>
-              </select>
-            </div>
-            <div class="form-group mb-3">
-              <label for="images" class="form-label">Images:</label>
-              <input type="file" class="form-control" id="images" name="images" multiple>
-            </div>
-            <button type="submit" class="btn btn-primary">Update</button>
-          </form>
         </div>
-      </div>
-    </div>
-  </section>
+    </div><!-- End Breadcrumbs -->
+    <section class="inner-page">
+        <div class="container" data-aos="fade-up">
+            <div class="row">
+                <div class="col">
+                    <form th:action="@{/hostels/update}" method="post" enctype="multipart/form-data"
+                          th:object="${hostel}">
+                        <input type="hidden" th:field="*{id}">
+                        <input type="hidden" th:field="*{imageList}">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group mb-3">
+                                    <label for="name">Название:</label>
+                                    <input type="text" class="form-control" id="name" name="name" required th:field="*{name}">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="address">Адрес:</label>
+                                    <input type="text" class="form-control" id="address" name="address" required
+                                           th:field="*{address}">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="numberOfBeds">Количество койко-мест:</label>
+                                    <input type="number" class="form-control" id="numberOfBeds" name="numberOfBeds" required
+                                           th:field="*{numberOfBeds}">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="pricePerDay">Цена за день:</label>
+                                    <input type="number" class="form-control" id="pricePerDay" name="pricePerDay" required
+                                           th:field="*{pricePerDay}">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="pricePerMonth">Цена за месяц:</label>
+                                    <input type="number" class="form-control" id="pricePerMonth" name="pricePerMonth" required
+                                           th:field="*{pricePerMonth}">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="discount">Скидка:</label>
+                                    <input type="number" class="form-control" id="discount" name="discount" required
+                                           th:field="*{discount}">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group mb-3">
+                                    <label for="description">Описание:</label>
+                                    <textarea class="form-control" id="description" name="description" required
+                                              th:field="*{description}" cols="30" rows="10"></textarea>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="sketchfab_link">Ссылка на 3Д:</label>
+                                    <input type="text" class="form-control" id="sketchfab_link" name="sketchfab_link" required
+                                           th:field="*{sketchfab_link}">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="status" class="form-label">Состояние:</label>
+                                    <select name="status" id="status" class="form-control" required>
+                                        <option value="Отличное">Отличное</option>
+                                        <option value="Хорошее">Хорошее</option>
+                                        <option value="Среднее">Среднее</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="images" class="form-label">Фото:</label>
+                                    <input type="file" class="form-control" id="images" name="images" multiple>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Изменить</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
 <footer th:insert="fragments/main.html :: footer"></footer>
 <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

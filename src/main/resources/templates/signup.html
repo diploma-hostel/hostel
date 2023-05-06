@@ -8,7 +8,7 @@
   <div class="breadcrumbs">
     <div class="container">
       <div class="d-flex justify-content-center align-items-center">
-        <h2>Signup Page</h2>
+        <h2>Страница регистрации</h2>
       </div>
     </div>
   </div><!-- End Breadcrumbs -->
@@ -18,11 +18,11 @@
         <div class="col-6 offset-3">
           <form action="/signup" method="post" th:object="${user}">
             <div class="form-group mb-3">
-              <label for="fio">Full name:</label>
+              <label for="fio">ФИО:</label>
               <input type="text" class="form-control" id="fio" name="fio" required th:field="*{fio}">
             </div>
             <div class="form-group mb-3">
-              <label for="phone">Phone:</label>
+              <label for="phone">Номер:</label>
               <input type="text" class="form-control" id="phone" name="phone" required th:field="*{phone}">
             </div>
             <div class="form-check mb-3">
@@ -32,10 +32,10 @@
               </label>
             </div>
             <div class="form-group mb-3">
-              <label for="password">Password:</label>
+              <label for="password">Пароль:</label>
               <input type="password" class="form-control" id="password" name="password" required th:field="*{password}">
             </div>
-            <button type="submit" class="btn btn-primary">Signup</button>
+            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
           </form>
         </div>
       </div>

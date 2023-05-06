@@ -8,7 +8,7 @@
     <div class="breadcrumbs">
         <div class="container">
             <div class="d-flex justify-content-center align-items-center">
-                <h2>Settle Page</h2>
+                <h2>Поселение в хостел <span th:text="${#strings.capitalize(hostel.getName())}"></span></h2>
             </div>
         </div>
     </div><!-- End Breadcrumbs -->
@@ -33,7 +33,7 @@
                                 allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
                                 execution-while-out-of-viewport
                                 execution-while-not-rendered web-share width="900" height="400"
-                                th:src="${hostel.sketchfab_link} + '/embed?autostart=1'"></iframe>
+                                th:src="${hostel.sketchfab_link} + '/embed?autostart=1&transparent=1&autospin=0.2&controls=1&watermark=0'"></iframe>
                     </div>
                 </div>
             </div>

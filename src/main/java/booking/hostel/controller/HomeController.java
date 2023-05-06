@@ -25,10 +25,20 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/test")
-    public String test() {
-        return "test";
+    @GetMapping("/team")
+    public String team() {
+        return "team";
     }
+
+    @GetMapping("/contact")
+    public String contact() {
+        return "contact";
+    }
+
+//    @GetMapping("/about")
+//    public String about() {
+//        return "about";
+//    }
 
     @GetMapping("/login")
     public String login() {
