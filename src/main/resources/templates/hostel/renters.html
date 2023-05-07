@@ -8,7 +8,7 @@
   <div class="breadcrumbs">
     <div class="container">
       <div class="d-flex justify-content-center align-items-center">
-        <h2>Арендаторы</h2>
+        <h2>[[#{renters}]]</h2>
       </div>
     </div>
   </div><!-- End Breadcrumbs -->
@@ -19,9 +19,9 @@
           <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">ФИО</th>
-            <th scope="col">Номер телефона</th>
-            <th scope="col">Койко-место</th>
+            <th scope="col">[[#{full_name}]]</th>
+            <th scope="col">[[#{phone_number}]]</th>
+            <th scope="col">[[#{bed}]]</th>
             <th scope="col"></th>
           </tr>
           </thead>
@@ -31,13 +31,13 @@
             <td th:text="${#strings.capitalize(renter.user.fio)}"></td>
             <td th:text="${renter.user.phone}"></td>
             <td th:text="${renter.number}"></td>
-            <td><a th:href="@{/hostels/unsettle/{id}(id=${renter.hostel.id},number=${renter.number})}" class="btn btn-danger">Убрать</a></td>
+            <td><a th:href="@{/hostels/unsettle/{id}(id=${renter.hostel.id},number=${renter.number})}" class="btn btn-danger">[[#{remove}]]</a></td>
           </tr>
           </tbody>
         </table>
       </div>
       <div class="row table p-3 mb-3" th:if="${renters.isEmpty()}">
-        <h1>Пустая таблица</h1>
+        <h1>[[#{empty_table}]]</h1>
       </div>
     </div>
   </section>

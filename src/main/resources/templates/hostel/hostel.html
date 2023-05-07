@@ -8,7 +8,7 @@
     <div class="breadcrumbs">
         <div class="container">
             <div class="d-flex justify-content-center align-items-center">
-                <h2>Хостел</h2>
+                <h2>[[#{hostel}]]</h2>
             </div>
         </div>
     </div><!-- End Breadcrumbs -->
@@ -19,63 +19,60 @@
                     <form th:action="@{/hostels/update}" method="post" enctype="multipart/form-data"
                           th:object="${hostel}">
                         <input type="hidden" th:field="*{id}">
+                        <input type="hidden" th:field="*{owner}">
                         <input type="hidden" th:field="*{imageList}">
                         <div class="row">
                             <div class="col">
                                 <div class="form-group mb-3">
-                                    <label for="name">Название:</label>
+                                    <label for="name">[[#{title}]]:</label>
                                     <input type="text" class="form-control" id="name" name="name" required th:field="*{name}">
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="address">Адрес:</label>
+                                    <label for="address">[[#{address1}]]:</label>
                                     <input type="text" class="form-control" id="address" name="address" required
                                            th:field="*{address}">
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="numberOfBeds">Количество койко-мест:</label>
+                                    <label for="numberOfBeds">[[#{number_of_beds}]]:</label>
                                     <input type="number" class="form-control" id="numberOfBeds" name="numberOfBeds" required
                                            th:field="*{numberOfBeds}">
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="pricePerDay">Цена за день:</label>
+                                    <label for="pricePerDay">[[#{price_per_day}]]:</label>
                                     <input type="number" class="form-control" id="pricePerDay" name="pricePerDay" required
                                            th:field="*{pricePerDay}">
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="pricePerMonth">Цена за месяц:</label>
+                                    <label for="pricePerMonth">[[#{price_per_month}]]:</label>
                                     <input type="number" class="form-control" id="pricePerMonth" name="pricePerMonth" required
                                            th:field="*{pricePerMonth}">
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="discount">Скидка:</label>
+                                    <label for="discount">[[#{discount}]]:</label>
                                     <input type="number" class="form-control" id="discount" name="discount" required
                                            th:field="*{discount}">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group mb-3">
-                                    <label for="description">Описание:</label>
+                                    <label for="description">[[#{description}]]:</label>
                                     <textarea class="form-control" id="description" name="description" required
                                               th:field="*{description}" cols="30" rows="10"></textarea>
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="sketchfab_link">Ссылка на 3Д:</label>
+                                    <label for="sketchfab_link">[[#{link_to_3d}]]:</label>
                                     <input type="text" class="form-control" id="sketchfab_link" name="sketchfab_link" required
                                            th:field="*{sketchfab_link}">
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="status" class="form-label">Состояние:</label>
+                                    <label for="status" class="form-label">[[#{status}]]:</label>
                                     <select name="status" id="status" class="form-control" required>
                                         <option value="Отличное">Отличное</option>
                                         <option value="Хорошее">Хорошее</option>
                                         <option value="Среднее">Среднее</option>
                                     </select>
                                 </div>
-                                <div class="form-group mb-3">
-                                    <label for="images" class="form-label">Фото:</label>
-                                    <input type="file" class="form-control" id="images" name="images" multiple>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Изменить</button>
+                                <button type="submit" class="btn btn-primary">[[#{update}]]</button>
                             </div>
                         </div>
                     </form>

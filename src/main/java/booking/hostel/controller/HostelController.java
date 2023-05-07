@@ -37,26 +37,13 @@ public class HostelController {
 
     @PostMapping("/update")
     @SneakyThrows
-    public String update(@ModelAttribute Hostel hostel, @RequestParam("images") MultipartFile[] images, Authentication authentication) {
-        hostel.setOwner(userService.getByPhone(authentication.getName()));
-        System.out.println(hostel.getId());
-        List<Image> imageList = hostel.getImageList();
-        for (MultipartFile file : images) {
-            if (file.getSize() > 0 && file.getSize() <= 4194304) { // check file size
-                byte[] bytes = file.getBytes();
-                String fileName = file.getOriginalFilename();
-                String fileType = file.getContentType();
-                Image image = Image.builder().name(fileName).data(bytes).type(fileType).build();
-                imageList.add(image);
-            }
+    public String update(@ModelAttribute Hostel hostel, Authentication authentication) {
+        if (hostel.getOwner().getId().equals(userService.getByPhone(authentication.getName()).getId())) {
+            hostel.setUpdatedTimestamp(System.currentTimeMillis());
+            hostel.setIsApproved(false);
+            hostelService.save(hostel);
         }
-
-        hostel.setImageList(imageList);
-        hostel.setCreatedTimestamp(System.currentTimeMillis());
-        hostel.setUpdatedTimestamp(System.currentTimeMillis());
-        hostel.setIsApproved(false);
-        hostelService.save(hostel);
-        return "redirect:/";
+        return "redirect:/users/profile";
     }
 
     @GetMapping("/settle/{id}")
@@ -76,7 +63,7 @@ public class HostelController {
                 }
                 Booking booking = Booking.builder().number(number).hostel(hostel).user(user).build();
                 bookingService.save(booking);
-                return "redirect:/";
+                return "redirect:/?success=true";
             } else {
                 throw new RuntimeException("Role is incorrect");
             }

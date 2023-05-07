@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="head">
     <meta charset="UTF-8">
     <link th:fragment="favicon" href="/assets/img/favicon.png" rel="icon">
@@ -28,36 +28,71 @@
 </head>
 <body>
 <header id="header" class="header fixed-top" data-scrollto-offset="0" th:fragment="header">
-    <div class="container-fluid d-flex align-items-center justify-content-between">
-
-        <a href="/" class="logo d-flex align-items-center scrollto me-auto me-lg-0">
-            <h1>Hostel Booking<span>.</span></h1>
-        </a>
-
-        <nav id="navbar" class="navbar">
-            <ul>
-<!--                <li><a class="nav-link scrollto" href="/about">About</a></li>-->
-                <li><a class="nav-link scrollto" href="/team">Команда</a></li>
-                <li><a class="nav-link scrollto" href="/contact">Контакты</a></li>
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle d-none"></i>
-        </nav><!-- .navbar -->
-
-        <div class="row" sec:authorize="!isAuthenticated()">
+    <div class="container-fluid">
+        <div class="row align-items-center justify-content-between">
             <div class="col">
-                <a class="btn-getstarted scrollto" href="/signup">Зарегистрироваться</a>
+                <a href="/" class="logo d-flex align-items-center scrollto me-auto me-lg-0">
+                    <h1>Hostel Booking<span>.</span></h1>
+                </a>
             </div>
-            <div class="col">
-                <a class="btn-getstarted scrollto" href="/login">Войти</a>
+            <div class="col d-flex justify-content-center">
+                <nav id="navbar" class="navbar">
+                    <ul>
+                        <!--                <li><a class="nav-link scrollto" href="/about">About</a></li>-->
+                        <li><a class="nav-link scrollto" href="/team">[[#{team}]]</a></li>
+                        <li><a class="nav-link scrollto" href="/contact">[[#{contact}]]</a></li>
+                    </ul>
+                    <i class="bi bi-list mobile-nav-toggle d-none"></i>
+                </nav><!-- .navbar -->
             </div>
-        </div>
+            <div class="col d-flex justify-content-end">
+                <div class="row" sec:authorize="!isAuthenticated()">
+                    <div class="col">
+                        <a th:href="@{${#request.getRequestURI()} + '?lang=en'}">
+                            <img src="/assets/img/lang/en.jpg" alt="English" width="24" height="16">
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a th:href="@{${#request.getRequestURI()} + '?lang=ru'}">
+                            <img src="/assets/img/lang/ru.jpg" alt="Russian" width="24" height="16">
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a th:href="@{${#request.getRequestURI()} + '?lang=kk'}">
+                            <img src="/assets/img/lang/kk.jpg" alt="Kazakh" width="24" height="16">
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a class="btn-getstarted scrollto" href="/signup">[[#{signup}]]</a>
+                    </div>
+                    <div class="col">
+                        <a class="btn-getstarted scrollto" href="/login">[[#{login}]]</a>
+                    </div>
+                </div>
 
-        <div class="row" style="width: fit-content;" sec:authorize="isAuthenticated()">
-            <div class="col">
-                <a class="btn-getstarted scrollto" href="/users/profile">Профиль</a>
-            </div>
-            <div class="col">
-                <a class="btn-getstarted scrollto" href="/logout">Выйти</a>
+                <div class="row" style="width: fit-content;" sec:authorize="isAuthenticated()">
+                    <div class="col">
+                        <a th:href="@{${#request.getRequestURI()} + '?lang=en'}">
+                            <img src="/assets/img/lang/en.jpg" alt="English" width="24" height="16">
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a th:href="@{${#request.getRequestURI()} + '?lang=ru'}">
+                            <img src="/assets/img/lang/ru.jpg" alt="Russian" width="24" height="16">
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a th:href="@{${#request.getRequestURI()} + '?lang=kk'}">
+                            <img src="/assets/img/lang/kk.jpg" alt="Kazakh" width="24" height="16">
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a class="btn-getstarted scrollto" href="/users/profile">[[#{profile}]]</a>
+                    </div>
+                    <div class="col">
+                        <a class="btn-getstarted scrollto" href="/logout">[[#{logout}]]</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -73,10 +108,10 @@
                     <div class="footer-info">
                         <h3>Hostel Booking</h3>
                         <p>
-                            Мангилик ел 55/11, Нур-Султан<br>
-                            Казахстан<br><br>
-                            <strong>Номер:</strong> +7 7172 777 9797<br>
-                            <strong>Почта:</strong> info@hostelbooking.com<br>
+                            [[#{address}]]<br>
+                            [[#{kazakhstan}]]<br><br>
+                            <strong>[[#{phone_number}]]:</strong> +7 7172 777 9797<br>
+                            <strong>[[#{email}]]:</strong> info@hostelbooking.com<br>
                         </p>
                     </div>
                 </div>
@@ -89,7 +124,7 @@
 
             <div class="d-flex flex-column align-items-center align-items-lg-start">
                 <div class="copyright">
-                    &copy Copyright <strong><span>HostelBooking</span></strong>. Все права защищены
+                    &copy Copyright <strong><span>HostelBooking</span></strong>. [[#{all_rights_reserved}]]
                 </div>
             </div>
 
@@ -106,12 +141,11 @@
 
 </footer>
 <main id="main" th:fragment="hostelstable">
-
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs">
         <div class="container">
             <div class="d-flex justify-content-center align-items-center">
-                <h2>Хостелы</h2>
+                <h2>[[#{hostels}]]</h2>
             </div>
         </div>
     </div><!-- End Breadcrumbs -->
@@ -130,11 +164,11 @@
                     <h6 class=""  th:text="'Состояние:' + ${hostel.status}"></h6>
                 </div>
                 <div class="col-2">
-                    <a th:href="@{/hostels/settle/{id}(id=${hostel.id})}" class="btn btn-primary">Поселиться</a>
+                    <a th:href="@{/hostels/settle/{id}(id=${hostel.id})}" class="btn btn-primary">[[#{settle}]]</a>
                 </div>
             </div>
             <div class="row table p-3 mb-3" th:if="${hostels.isEmpty()}">
-                <h1>Пустая таблица</h1>
+                <h1>[[#{empty_table}]]</h1>
             </div>
         </div>
     </section>

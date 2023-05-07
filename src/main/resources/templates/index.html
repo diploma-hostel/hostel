@@ -7,5 +7,14 @@
 <footer th:insert="fragments/main.html :: footer"></footer>
 <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 <div id="preloader"></div>
+<script>
+    window.onload = function() {
+        // check if success parameter is present in the URL
+        if (window.location.search.includes('success=true')) {
+            // display success alert
+            alert('Запрос был принят на обработку!');
+        }
+    }
+</script>
 </body>
 </html>

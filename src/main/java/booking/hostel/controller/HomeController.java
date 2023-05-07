@@ -35,11 +35,6 @@ public class HomeController {
         return "contact";
     }
 
-//    @GetMapping("/about")
-//    public String about() {
-//        return "about";
-//    }
-
     @GetMapping("/login")
     public String login() {
         return "login";

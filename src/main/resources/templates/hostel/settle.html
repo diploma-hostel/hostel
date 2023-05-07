@@ -8,7 +8,7 @@
     <div class="breadcrumbs">
         <div class="container">
             <div class="d-flex justify-content-center align-items-center">
-                <h2>Поселение в хостел <span th:text="${#strings.capitalize(hostel.getName())}"></span></h2>
+                <h2>[[#{settle_in_hostel}]] <span th:text="${#strings.capitalize(hostel.getName())}"></span></h2>
             </div>
         </div>
     </div><!-- End Breadcrumbs -->
@@ -16,9 +16,9 @@
         <div class="container" data-aos="fade-up">
             <div class="row booking p-3">
                 <div class="col-1" th:each="bedNumber, iter : ${#numbers.sequence(1, hostel.numberOfBeds)}">
-                    <a th:if="${!reservedNumbers.contains(bedNumber)}" class="btn btn-primary" th:text="${bedNumber} + ' койко'"
+                    <a th:if="${!reservedNumbers.contains(bedNumber)}" class="btn btn-primary" th:text="${bedNumber} + ' ' + #{bed1}"
                        th:href="@{/hostels/settle/{id}(id=${hostel.id},number=${bedNumber})}"></a>
-                    <a th:if="${reservedNumbers.contains(bedNumber)}" class="btn btn-danger" th:text="${bedNumber} + ' койко'"
+                    <a th:if="${reservedNumbers.contains(bedNumber)}" class="btn btn-danger" th:text="${bedNumber} + ' ' + #{bed1}"
                        disabled></a>
                 </div>
             </div>
