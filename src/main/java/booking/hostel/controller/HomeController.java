@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/")
@@ -47,7 +48,14 @@ public class HomeController {
     }
 
     @PostMapping("/signup")
-    public String signupPost(@ModelAttribute("user") User user, HttpServletRequest request) {
+    public String signupPost(@ModelAttribute("user") User user, HttpServletRequest request, Principal principal) {
+        User user1 = userService.getByPhone(principal.getName());
+        if (user != null) {
+            user1.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+            user1.setFio(user.getFio());
+            userService.save(user1);
+            return "redirect:/users/profile";
+        }
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         boolean isOwner = request.getParameter("owner") != null;
         user.setRole(Role.ROLE_CLIENT);
