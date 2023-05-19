@@ -39,6 +39,7 @@
                 <nav id="navbar" class="navbar">
                     <ul>
                         <!--                <li><a class="nav-link scrollto" href="/about">About</a></li>-->
+                        <li><a class="nav-link scrollto" href="/hostels">[[#{hostels}]]</a></li>
                         <li><a class="nav-link scrollto" href="/team">[[#{team}]]</a></li>
                         <li><a class="nav-link scrollto" href="/contact">[[#{contact}]]</a></li>
                     </ul>
@@ -102,16 +103,21 @@
 
     <div class="footer-content">
         <div class="container">
-            <div class="row">
-
+            <h3>Hostel Booking</h3>
+            <div class="row justify-content-between">
                 <div class="col-lg-3 col-md-6">
                     <div class="footer-info">
-                        <h3>Hostel Booking</h3>
                         <p>
                             [[#{address}]]<br>
-                            [[#{kazakhstan}]]<br><br>
+                            [[#{kazakhstan}]]
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-info">
+                        <p>
                             <strong>[[#{phone_number}]]:</strong> +7 7172 777 9797<br>
-                            <strong>[[#{email}]]:</strong> info@hostelbooking.com<br>
+                            <strong>[[#{email}]]:</strong> info@hostelbooking.com
                         </p>
                     </div>
                 </div>
@@ -121,7 +127,6 @@
 
     <div class="footer-legal text-center">
         <div class="container d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center">
-
             <div class="d-flex flex-column align-items-center align-items-lg-start">
                 <div class="copyright">
                     &copy Copyright <strong><span>HostelBooking</span></strong>. [[#{all_rights_reserved}]]
@@ -129,11 +134,8 @@
             </div>
 
             <div class="social-links order-first order-lg-last mb-3 mb-lg-0">
-                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="google-plus"><i class="bi bi-skype"></i></a>
-                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                <a href="https://www.instagram.com/hotelbooking/" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="https://wa.link/jfkjx1" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
             </div>
 
         </div>
@@ -151,7 +153,7 @@
     </div><!-- End Breadcrumbs -->
     <section class="inner-page">
         <div class="container" data-aos="fade-up">
-            <div class="row table p-3 mb-3" th:each="hostel : ${hostels}">
+            <div class="row table p-3" th:each="hostel, iter : ${hostels}">
                 <div class="col-4 justify-content-center align-items-center">
                     <img class="" th:if="${!hostel.imageList.isEmpty()}" th:src="@{/images/{id}(id=${hostel.imageList.get(0).id})}" width="320" height="180" alt="image">
                     <img class="" th:if="${hostel.imageList.isEmpty()}" src="https://prescotthobbies.com/wp-content/uploads/2019/12/image-not-available-684f2d57b8fb401a6846574ad4d7173be03aab64aac30c989eba8688ad9bfa05.png" width="320" height="180" alt="image">
@@ -161,7 +163,7 @@
                     <h6 th:text="${hostel.address}"></h6>
                     <h6 class=""  th:text="${hostel.numberOfBeds} + ' мест'"></h6>
                     <h6 class=""  th:text="${hostel.description}"></h6>
-                    <h6 class=""  th:text="'Состояние:' + ${hostel.status}"></h6>
+                    <h6 class=""  th:text="#{status} + ' ' + ${hostel.status}"></h6>
                 </div>
                 <div class="col-2">
                     <a th:href="@{/hostels/settle/{id}(id=${hostel.id})}" class="btn btn-primary">[[#{settle}]]</a>

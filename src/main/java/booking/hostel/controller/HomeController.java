@@ -21,8 +21,7 @@ public class HomeController {
     private final UserService userService;
 
     @GetMapping
-    public String index(Model model) {
-        model.addAttribute("hostels", hostelService.getAll());
+    public String index() {
         return "index";
     }
 

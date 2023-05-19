@@ -14,27 +14,35 @@
     </div><!-- End Breadcrumbs -->
     <section class="inner-page">
         <div class="container" data-aos="fade-up">
-            <div class="row booking p-3">
-                <div class="col-1" th:each="bedNumber, iter : ${#numbers.sequence(1, hostel.numberOfBeds)}">
-                    <a th:if="${!reservedNumbers.contains(bedNumber)}" class="btn btn-primary" th:text="${bedNumber} + ' ' + #{bed1}"
-                       th:href="@{/hostels/settle/{id}(id=${hostel.id},number=${bedNumber})}"></a>
-                    <a th:if="${reservedNumbers.contains(bedNumber)}" class="btn btn-danger" th:text="${bedNumber} + ' ' + #{bed1}"
-                       disabled></a>
-                </div>
-            </div>
-            <br>
-            <hr>
-            <br>
             <div class="row">
+                <div class="col">
+                    <h5 class="text-primary"  th:text="${#strings.capitalize(hostel.name)}"></h5>
+                    <h6 th:text="${hostel.address}"></h6>
+                    <h6 class=""  th:text="${hostel.description}"></h6>
+                    <h6 class=""  th:text="#{status} + ' ' + ${hostel.status}"></h6>
+                    <h6 class=""  th:text="#{price_per_day} + ': ' + ${hostel.pricePerDay} + '₸'"></h6>
+                    <h6 class=""  th:text="#{price_per_month} + ': ' + ${hostel.pricePerMonth} + '₸'"></h6>
+                </div>
                 <div class="col d-flex justify-content-center align-items-center">
                     <div class="sketchfab-embed-wrapper">
                         <iframe title="Fairy Hostel" frameborder="0" allowfullscreen mozallowfullscreen="true"
                                 webkitallowfullscreen="true"
                                 allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
                                 execution-while-out-of-viewport
-                                execution-while-not-rendered web-share width="900" height="400"
+                                execution-while-not-rendered web-share width="500" height="300"
                                 th:src="${hostel.sketchfab_link} + '/embed?autostart=1&transparent=1&autospin=0.2&controls=1&watermark=0'"></iframe>
                     </div>
+                </div>
+            </div>
+            <br>
+            <hr>
+            <br>
+            <div class="row booking p-3">
+                <div class="col-1" th:if="${hostel.numberOfBeds > 0}" th:each="bedNumber, iter : ${#numbers.sequence(1, hostel.numberOfBeds)}">
+                    <a th:if="${!reservedNumbers.contains(bedNumber)}" class="btn btn-primary" th:text="${bedNumber} + ' ' + #{bed1}"
+                       th:href="@{/hostels/settle/{id}(id=${hostel.id},number=${bedNumber})}"></a>
+                    <a th:if="${reservedNumbers.contains(bedNumber)}" class="btn btn-danger" th:text="${bedNumber} + ' ' + #{bed1}"
+                       disabled></a>
                 </div>
             </div>
         </div>

@@ -27,6 +27,12 @@ public class HostelController {
     private final BookingService bookingService;
     private final UserService userService;
 
+    @GetMapping
+    public String getAll(Model model) {
+        model.addAttribute("hostels", hostelService.getAll());
+        return "hostel/hostels";
+    }
+
     @GetMapping("/{id}")
     public String getById(@PathVariable Integer id, Model model) {
         Hostel hostel = hostelService.getById(id);
@@ -63,7 +69,7 @@ public class HostelController {
                 }
                 Booking booking = Booking.builder().number(number).hostel(hostel).user(user).build();
                 bookingService.save(booking);
-                return "redirect:/?success=true";
+                return "redirect:/hostels?success=true";
             } else {
                 throw new RuntimeException("Role is incorrect");
             }

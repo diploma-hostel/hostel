@@ -3,18 +3,22 @@
 <head th:insert="fragments/main.html :: head"><title>Home page</title></head>
 <body>
 <header th:insert="fragments/main.html :: header"></header>
-<main th:insert="fragments/main.html :: hostelstable"></main>
+
+<main id="main">
+    <section id="hero-animated" class="hero-animated d-flex align-items-center">
+        <div class="container d-flex my-0 py-0 flex-column justify-content-center align-items-center text-center position-relative" data-aos="zoom-out">
+            <img src="assets/img/travel.png" class="img-fluid animated my-0 py-0">
+            <h2>[[#{welcome_to}]]</h2>
+            <p>[[#{plan}]]</p>
+<!--            <div class="d-flex">-->
+<!--                <a href="#about" class="btn-get-started scrollto">[[#{signup}]]</a>-->
+<!--                <a href="https://www.youtube.com/watch?v=B8-qITIKyK8" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>[[#{watch}]]</span></a>-->
+<!--            </div>-->
+        </div>
+    </section>
+</main>
 <footer th:insert="fragments/main.html :: footer"></footer>
 <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 <div id="preloader"></div>
-<script>
-    window.onload = function() {
-        // check if success parameter is present in the URL
-        if (window.location.search.includes('success=true')) {
-            // display success alert
-            alert('Запрос был принят на обработку!');
-        }
-    }
-</script>
 </body>
 </html>
